@@ -21,6 +21,7 @@ The goal at this stage is to move from basic syntax familiarity into more confid
 ## Structure
 
 * Separate directory for each lesson
+* Lesson notes in .md files inside notes directory for each lesson
 
 ## Running code
 
