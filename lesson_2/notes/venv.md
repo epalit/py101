@@ -34,6 +34,12 @@ To deactivate:
 ## Full Flow
 
 ```
+# Set up a virtual environment named `env_a` for Python 3.9
+python3.9 -m venv ~/.venv/env_a
+source ~/.venv/env_a/bin/activate
+```
+
+```
 python3 -m venv .venv
 source .venv/bin/activate
 pip install requests
