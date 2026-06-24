@@ -12,40 +12,55 @@ def invalid_number(number_str):
 
     return False
 
-print(build_prompt("Welcome to Calculator!", inc_newline=False))
+def get_number():
+    number = input(build_prompt("What's the first number?"))
 
-number1 = input(build_prompt("What's the first number?"))
+    while invalid_number(number):
+        number = input(
+            build_prompt("Hmm... that doesn't look like a valid number.")
+        )
+    return number
 
-while invalid_number(number1):
-    number1 = input(
-        build_prompt("Hmm... that doesn't look like a valid number.")
-    )
-
-number2 = input(build_prompt("What's the second number?"))
-
-while invalid_number(number2):
-    number2 = input(
-        build_prompt("Hmm... that doesn't look like a valid number.")
-    )
-
-operation = input(
-    build_prompt("""What operation would you like to perform?
-1) Add 2) Subtract 3) Multiply 4) Divide""")
-)
-
-while operation not in ["1", "2", "3", "4"]:
+def get_operation():
     operation = input(
-        build_prompt('You must choose 1, 2, 3, or 4')
+        build_prompt("""What operation would you like to perform?
+    1) Add 2) Subtract 3) Multiply 4) Divide""")
     )
 
-match operation:
-    case '1':
-        output = int(number1) + int(number2)
-    case '2':
-        output = int(number1) - int(number2)
-    case '3':
-        output = int(number1) * int(number2)
-    case '4':
-        output = int(number1) / int(number2)
+    while operation not in ["1", "2", "3", "4"]:
+        operation = input(
+            build_prompt('You must choose 1, 2, 3, or 4')
+        )
+    return operation
 
-print(build_prompt(f"The result is: {output}", inc_newline=False))
+def welcome():
+    print(build_prompt("Welcome to Calculator!", inc_newline=False))
+
+def get_calculation_input():
+    number1 = get_number()
+    number2 = get_number()
+    operation = get_operation()
+    return (number1, number2, operation)
+
+def do_calculation(number1, number2, operation):
+    match operation:
+        case '1':
+            output = int(number1) + int(number2)
+        case '2':
+            output = int(number1) - int(number2)
+        case '3':
+            output = int(number1) * int(number2)
+        case '4':
+            output = int(number1) / int(number2)
+    return output
+
+def display_calculation_result(output):
+    print(build_prompt(f"The result is: {output}", inc_newline=False))
+
+def run_calculator():
+    welcome()
+    (number1, number2, operation) = get_calculation_input()
+    output = do_calculation(number1, number2, operation)
+    display_calculation_result(output)
+
+run_calculator()
