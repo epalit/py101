@@ -57,10 +57,23 @@ def do_calculation(number1, number2, operation):
 def display_calculation_result(output):
     print(build_prompt(f"The result is: {output}", inc_newline=False))
 
+def check_do_another():
+    response = input(
+        build_prompt("Would you like to do another calculation? (Yes or No)")
+    )
+    while response not in ["Yes","No"]:
+        response = input(
+            build_prompt('You must choose Yes or No')
+        )
+    return True if response == 'Yes' else False
+
 def run_calculator():
     welcome()
-    (number1, number2, operation) = get_calculation_input()
-    output = do_calculation(number1, number2, operation)
-    display_calculation_result(output)
+    do_another_calculation = True
+    while do_another_calculation:
+        (number1, number2, operation) = get_calculation_input()
+        output = do_calculation(number1, number2, operation)
+        display_calculation_result(output)
+        do_another_calculation = check_do_another()
 
 run_calculator()
