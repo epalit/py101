@@ -14,13 +14,14 @@ prompt(
 )
 operation = input()
 
-if operation == "1":  # '1' represents addition
-    output = int(number1) + int(number2)
-elif operation == "2":  # '2' represents subtraction
-    output = int(number1) - int(number2)
-elif operation == "3":  # '3' represents multiplication
-    output = int(number1) * int(number2)
-elif operation == "4":  # '4' represents division
-    output = int(number1) / int(number2)
+match operation:
+    case '1':
+        output = int(number1) + int(number2)
+    case '2':
+        output = int(number1) - int(number2)
+    case '3':
+        output = int(number1) * int(number2)
+    case '4':
+        output = int(number1) / int(number2)
 
 prompt(f"The result is: {output}")
