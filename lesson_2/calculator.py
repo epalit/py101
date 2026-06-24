@@ -1,5 +1,8 @@
-def prompt(message):
-    print(f'==> {message}')
+def build_prompt(message, inc_newline=True):
+    prompt = f'-> {message}'
+    if inc_newline is True:
+        prompt = prompt + '\n'
+    return prompt
 
 def invalid_number(number_str):
     try:
@@ -9,29 +12,31 @@ def invalid_number(number_str):
 
     return False
 
-prompt("Welcome to Calculator!")
+print(build_prompt("Welcome to Calculator!", inc_newline=False))
 
-prompt("What's the first number?")
-number1 = input()
+number1 = input(build_prompt("What's the first number?"))
 
 while invalid_number(number1):
-    prompt("Hmm... that doesn't look like a valid number.")
-    number1 = input()
+    number1 = input(
+        build_prompt("Hmm... that doesn't look like a valid number.")
+    )
 
-prompt("What's the second number?")
-number2 = input()
+number2 = input(build_prompt("What's the second number?"))
 
 while invalid_number(number2):
-    prompt("Hmm... that doesn't look like a valid number.")
-    number2 = input()
+    number2 = input(
+        build_prompt("Hmm... that doesn't look like a valid number.")
+    )
 
-prompt("""What operation would you like to perform?
+operation = input(
+    build_prompt("""What operation would you like to perform?
 1) Add 2) Subtract 3) Multiply 4) Divide""")
-operation = input()
+)
 
 while operation not in ["1", "2", "3", "4"]:
-    prompt('You must choose 1, 2, 3, or 4')
-    operation = input()
+    operation = input(
+        build_prompt('You must choose 1, 2, 3, or 4')
+    )
 
 match operation:
     case '1':
@@ -43,4 +48,4 @@ match operation:
     case '4':
         output = int(number1) / int(number2)
 
-prompt(f"The result is: {output}")
+print(build_prompt(f"The result is: {output}", inc_newline=False))
