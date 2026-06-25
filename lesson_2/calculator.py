@@ -1,8 +1,8 @@
 import json
 
-def load_messages():
+def load_messages(language):
     with open('calculator_messages.json', 'r') as file:
-        return json.load(file)
+        return json.load(file)[language]
 
 def build_prompt(message, inc_newline=True):
     prompt = f'-> {message}'
@@ -17,6 +17,14 @@ def invalid_number(number_str):
         return True
 
     return False
+
+def get_lang():
+    language = input(build_prompt("Select language from: [en]"))
+    while language not in ["en", ""]:
+        language = input(
+            build_prompt("Select language from: [en]")
+        )
+    return language or 'en'
 
 def get_number(prompt_text):
     number = input(build_prompt(prompt_text))
@@ -78,5 +86,6 @@ def run_calculator():
         display_calculation_result(output)
         do_another_calculation = check_do_another()
 
-MESSAGES = load_messages()
+lang = get_lang()
+MESSAGES = load_messages(lang)
 run_calculator()
