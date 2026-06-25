@@ -12,8 +12,8 @@ def invalid_number(number_str):
 
     return False
 
-def get_number():
-    number = input(build_prompt("What's the first number?"))
+def get_number(prompt_text):
+    number = input(build_prompt(prompt_text))
 
     while invalid_number(number):
         number = input(
@@ -37,8 +37,8 @@ def welcome():
     print(build_prompt("Welcome to Calculator!", inc_newline=False))
 
 def get_calculation_input():
-    number1 = get_number()
-    number2 = get_number()
+    number1 = get_number("What's the first number?")
+    number2 = get_number("What's the second number")
     operation = get_operation()
     return (number1, number2, operation)
 
