@@ -64,7 +64,10 @@ def do_calculation(number1, number2, operation):
         case '3':
             output = float(number1) * float(number2)
         case '4':
-            output = float(number1) / float(number2)
+            if float(number2) == 0.0:
+                output = MESSAGES['division_by_zero']
+            else:
+                output = float(number1) / float(number2)
     return output
 
 def display_calculation_result(output):
