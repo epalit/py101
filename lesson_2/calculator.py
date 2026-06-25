@@ -59,13 +59,9 @@ def display_calculation_result(output):
 
 def check_do_another():
     response = input(
-        build_prompt("Would you like to do another calculation? (Yes or No)")
+        build_prompt("Would you like to do another calculation? (y/n)")
     )
-    while response not in ["Yes","No"]:
-        response = input(
-            build_prompt('You must choose Yes or No')
-        )
-    return True if response == 'Yes' else False
+    return bool(response) and response[0].lower() == 'y'
 
 def run_calculator():
     welcome()
