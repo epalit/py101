@@ -12,7 +12,7 @@ def build_prompt(message, inc_newline=True):
 
 def invalid_number(number_str):
     try:
-        int(number_str)
+        float(number_str)
     except ValueError:
         return True
 
@@ -58,13 +58,13 @@ def get_calculation_input():
 def do_calculation(number1, number2, operation):
     match operation:
         case '1':
-            output = int(number1) + int(number2)
+            output = float(number1) + float(number2)
         case '2':
-            output = int(number1) - int(number2)
+            output = float(number1) - float(number2)
         case '3':
-            output = int(number1) * int(number2)
+            output = float(number1) * float(number2)
         case '4':
-            output = int(number1) / int(number2)
+            output = float(number1) / float(number2)
     return output
 
 def display_calculation_result(output):
