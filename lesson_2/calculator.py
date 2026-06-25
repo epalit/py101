@@ -6,7 +6,7 @@ def load_messages(language):
 
 def build_prompt(message, inc_newline=True):
     prompt = f'-> {message}'
-    if inc_newline is True:
+    if inc_newline:
         prompt = prompt + '\n'
     return prompt
 
