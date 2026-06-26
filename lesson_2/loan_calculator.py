@@ -65,7 +65,7 @@ def run_loan_calculator():
     loan_amount = get_loan_amount()
     apr = get_apr()
     duration = get_duration()
-    monthly_payment = calc_monthly_payment(loan_amount, duration, apr)
+    monthly_payment = calc_monthly_payment(loan_amount, apr, duration)
     display_monthly_payment(monthly_payment)
 
 run_loan_calculator()
