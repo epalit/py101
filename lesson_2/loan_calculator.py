@@ -1,7 +1,3 @@
-# TODO: apr:
-#   ensure input is valid
-#   handle input formats (like % or .)
-#   exception handling
 # TODO: duration:
 #   ensure input is valid
 #   ask months or years
@@ -55,9 +51,16 @@ def get_loan_amount():
 
 def get_apr():
     msg = fmt_prompt_msg("Please enter your apr:", inc_newline=True)
-    apr = input(msg)
-    apr = float(apr) / 100
-    return apr
+    while True:
+        apr = input(msg).strip()
+        try:
+            return float(apr) / 100
+        except ValueError:
+            msg = fmt_prompt_msg(
+                "Please enter a whole number or decimal using a '.', no '%'",
+                err=True,
+                inc_newline=True
+            )
 
 def get_duration():
     msg = fmt_prompt_msg("Please enter the loan duration:", inc_newline=True)
