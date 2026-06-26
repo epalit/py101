@@ -57,7 +57,7 @@ def calc_monthly_payment(
     return monthly_payment
 
 def display_monthly_payment(monthly_payment):
-    msg = fmt_prompt_msg(f"Your monthly payment is: ${monthly_payment}")
+    msg = fmt_prompt_msg(f"Your monthly payment is: ${monthly_payment:.2f}")
     print(msg)
 
 def run_loan_calculator():
