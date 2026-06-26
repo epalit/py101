@@ -41,7 +41,9 @@ def get_loan_amount():
 
 def get_apr():
     msg = fmt_prompt_msg("Please enter your apr:", inc_newline=True)
-    return int(input(msg))
+    apr = input(msg)
+    apr = float(apr) / 100
+    return apr
 
 def get_duration():
     msg = fmt_prompt_msg("Please enter the loan duration:", inc_newline=True)
