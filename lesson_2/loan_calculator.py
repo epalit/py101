@@ -1,7 +1,3 @@
-# TODO: duration:
-#   ensure input is valid
-#   ask months or years
-#   exception handling
 # TODO:
 #   Ask if user wants to do another calculation
 #   Add more instructions to welcome message
@@ -62,9 +58,47 @@ def get_apr():
                 inc_newline=True
             )
 
+def get_duration_unit():
+    msg = fmt_prompt_msg(
+        "Select months or years for your loan duration (m/y):",
+        inc_newline=True
+    )
+    while True:
+        unit = input(msg).strip()
+        if unit not in ('m', 'y'):
+            msg = fmt_prompt_msg(
+                "You must select m (for months) or y (for years):",
+                err=True,
+                inc_newline=True
+            )
+        else:
+            break
+    return unit
+
+def get_duration_value():
+    msg = fmt_prompt_msg(
+        "Please enter your loan duration:",
+        inc_newline=True
+    )
+    while True:
+        duration = input(msg).strip()
+        try:
+            return float(duration)
+        except ValueError:
+            msg = fmt_prompt_msg(
+                "Please enter a whole number or decimal using a '.', no commas",
+                err=True,
+                inc_newline=True
+            )
+
 def get_duration():
-    msg = fmt_prompt_msg("Please enter the loan duration:", inc_newline=True)
-    return int(input(msg))
+    unit = get_duration_unit()
+    duration = get_duration_value()
+    match unit:
+        case 'm':
+            return duration
+        case 'y':
+            return duration * 12
 
 def calc_monthly_payment(
         amount,
