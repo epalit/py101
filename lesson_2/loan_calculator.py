@@ -1,7 +1,3 @@
-# TODO: loan amount:
-#   ensure input is valid
-#   handle input formats (like , or .)
-#   exception handling
 # TODO: apr:
 #   ensure input is valid
 #   handle input formats (like % or .)
@@ -37,7 +33,25 @@ def welcome():
 
 def get_loan_amount():
     msg = fmt_prompt_msg("Please enter your loan amount:", inc_newline=True)
-    return int(input(msg))
+    while True:
+        amount = input(msg).strip()
+        try:
+            amount = float(amount)
+        except ValueError:
+            msg = fmt_prompt_msg(
+                "Please enter a whole number or decimal using a '.', no commas",
+                err=True,
+                inc_newline=True
+            )
+            continue
+        if amount <= 0:
+            msg = fmt_prompt_msg(
+                "Loan amount must be greater than zero",
+                err=True,
+                inc_newline=True
+            )
+            continue
+        return amount
 
 def get_apr():
     msg = fmt_prompt_msg("Please enter your apr:", inc_newline=True)
