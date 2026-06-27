@@ -1,6 +1,3 @@
-# TODO:
-#   Ask if user wants to do another calculation
-
 def fmt_prompt_msg(msg, err=False, inc_newline=False):
     if err:
         prompt_msg = f"!!! {msg}"
@@ -132,13 +129,23 @@ def display_monthly_payment(monthly_payment):
     msg = fmt_prompt_msg(f"Your monthly payment is: ${monthly_payment:.2f}")
     print(msg)
 
+def user_wants_to_continue():
+    msg = fmt_prompt_msg(
+        "Do you want to perform another calculation? (y/n)",
+        inc_newline=True
+    )
+    response = input(msg)
+    return bool(response) and response[0].lower() == 'y'
+
 def run_loan_calculator():
     welcome()
-    loan_amount = get_loan_amount()
-    apr = get_apr()
-    duration = get_duration()
-    monthly_payment = calc_monthly_payment(loan_amount, apr, duration)
-    display_monthly_payment(monthly_payment)
+    while True:
+        loan_amount = get_loan_amount()
+        apr = get_apr()
+        duration = get_duration()
+        monthly_payment = calc_monthly_payment(loan_amount, apr, duration)
+        display_monthly_payment(monthly_payment)
+        if not user_wants_to_continue():
+            break
 
 run_loan_calculator()
-
