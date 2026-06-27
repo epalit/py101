@@ -1,8 +1,5 @@
 # TODO:
 #   Ask if user wants to do another calculation
-#   Add more instructions to welcome message and tidy formatting
-#   Stop negative duration
-#   Check apr variable naming
 
 def fmt_prompt_msg(msg, err=False, inc_newline=False):
     if err:
@@ -15,13 +12,15 @@ def fmt_prompt_msg(msg, err=False, inc_newline=False):
 
 def welcome():
     msg = fmt_prompt_msg(
-        """ Welcome to the loan calculator!
-            We'll ask you for three pieces of information one at a time:
-                     - apr
-                     - duration
-                     - amount
-            Then we'll display your monthly payment.
-        """)
+    """ Welcome to the loan calculator!
+
+    We'll ask you for three pieces of information one at a time:
+            - amount
+            - apr
+            - duration
+
+    Then we'll display your monthly payment.
+    """)
     print(msg)
 
 def get_loan_amount():
