@@ -1,7 +1,8 @@
 # TODO:
 #   Ask if user wants to do another calculation
-#   Add more instructions to welcome message
-#   Handle no-interest loans
+#   Add more instructions to welcome message and tidy formatting
+#   Stop negative duration
+#   Check apr variable naming
 
 def fmt_prompt_msg(msg, err=False, inc_newline=False):
     if err:
@@ -50,13 +51,22 @@ def get_apr():
     while True:
         apr = input(msg).strip()
         try:
-            return float(apr) / 100
+            apr= float(apr)
         except ValueError:
             msg = fmt_prompt_msg(
                 "Please enter a whole number or decimal using a '.', no '%'",
                 err=True,
                 inc_newline=True
             )
+            continue
+        if apr <= 0:
+            msg = fmt_prompt_msg(
+                "APR cannot be negative or 0, please enter a value above 0",
+                err=True,
+                inc_newline=True
+            )
+        else:
+            return apr
 
 def get_duration_unit():
     msg = fmt_prompt_msg(
@@ -105,7 +115,8 @@ def calc_monthly_payment(
         apr,
         duration
     ):
-    rate = apr/12
+    decimal_apr = apr/100
+    rate = decimal_apr/12
     monthly_payment = amount * (rate / (1 - (1 + rate) ** (-duration)))
     return monthly_payment
 
