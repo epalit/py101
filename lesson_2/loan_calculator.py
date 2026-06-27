@@ -28,7 +28,8 @@ def get_loan_amount():
             amount = float(amount)
         except ValueError:
             msg = fmt_prompt_msg(
-                "Please enter a whole number or decimal using a '.', no commas",
+                "Please enter a whole number or decimal using a '.'," \
+                " no commas",
                 err=True,
                 inc_newline=True
             )
@@ -92,14 +93,16 @@ def get_duration_value():
             duration = float(duration)
         except ValueError:
             msg = fmt_prompt_msg(
-                "Please enter a whole number or decimal using a '.', no commas",
+                "Please enter a whole number or decimal using a '.'," \
+                " no commas",
                 err=True,
                 inc_newline=True
             )
             continue
         if duration <= 0:
             msg = fmt_prompt_msg(
-                "Duration cannot be negative or 0, please enter a value above 0",
+                "Duration cannot be negative or 0, " \
+                "please enter a value above 0",
                 err=True,
                 inc_newline=True
             )
