@@ -93,13 +93,22 @@ def get_duration_value():
     while True:
         duration = input(msg).strip()
         try:
-            return float(duration)
+            duration = float(duration)
         except ValueError:
             msg = fmt_prompt_msg(
                 "Please enter a whole number or decimal using a '.', no commas",
                 err=True,
                 inc_newline=True
             )
+            continue
+        if duration <= 0:
+            msg = fmt_prompt_msg(
+                "Duration cannot be negative or 0, please enter a value above 0",
+                err=True,
+                inc_newline=True
+            )
+        else:
+            return duration
 
 def get_duration():
     unit = get_duration_unit()
