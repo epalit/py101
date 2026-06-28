@@ -112,11 +112,11 @@ def get_duration_value():
 def get_duration():
     unit = get_duration_unit()
     duration = get_duration_value()
-    match unit:
-        case 'm':
-            return duration
-        case 'y':
-            return duration * MONTHS_IN_A_YEAR
+
+    if unit == 'y':
+        duration = duration * MONTHS_IN_A_YEAR
+
+    return duration
 
 def calc_monthly_payment(
         amount,
