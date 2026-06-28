@@ -28,7 +28,7 @@ def get_loan_amount():
             amount = float(amount)
         except ValueError:
             msg = fmt_prompt_msg(
-                "Please enter a whole number or decimal using a '.'," \
+                "Please enter a whole number or decimal using a '.',"
                 " no commas",
                 err=True,
                 inc_newline=True
@@ -93,7 +93,7 @@ def get_duration_value():
             duration = float(duration)
         except ValueError:
             msg = fmt_prompt_msg(
-                "Please enter a whole number or decimal using a '.'," \
+                "Please enter a whole number or decimal using a '.',"
                 " no commas",
                 err=True,
                 inc_newline=True
@@ -101,7 +101,7 @@ def get_duration_value():
             continue
         if duration <= 0:
             msg = fmt_prompt_msg(
-                "Duration cannot be negative or 0, " \
+                "Duration cannot be negative or 0, "
                 "please enter a value above 0",
                 err=True,
                 inc_newline=True
@@ -118,11 +118,7 @@ def get_duration():
 
     return duration
 
-def calc_monthly_payment(
-        amount,
-        apr,
-        duration
-    ):
+def calc_monthly_payment(amount, apr, duration):
     decimal_apr = apr / 100
     rate = decimal_apr / MONTHS_IN_A_YEAR
     if rate == 0.0:
