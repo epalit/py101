@@ -1,3 +1,5 @@
+MONTHS_IN_A_YEAR = 12
+
 def fmt_prompt_msg(msg, err=False, inc_newline=False):
     if err:
         prompt_msg = f"!!! {msg}"
@@ -116,7 +118,7 @@ def get_duration():
         case 'm':
             return duration
         case 'y':
-            return duration * 12
+            return duration * MONTHS_IN_A_YEAR
 
 def calc_monthly_payment(
         amount,
@@ -124,7 +126,7 @@ def calc_monthly_payment(
         duration
     ):
     decimal_apr = apr/100
-    rate = decimal_apr/12
+    rate = decimal_apr/MONTHS_IN_A_YEAR
     if apr == 0.0:
         monthly_payment = amount/duration
     else:
