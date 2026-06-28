@@ -1,25 +1,38 @@
 import random
 
-VALID_CHOICES = ["rock", "paper", "scissors"]
+VALID_CHOICES = ["rock", "paper", "scissors", "lizard", "spock"]
+BEATS = {
+    "rock": ("scissors", "lizard"),
+    "paper": ("rock", "spock"),
+    "scissors": ("paper", "lizard"),
+    "lizard": ("paper", "spock"),
+    "spock": ("rock", "scissors")
+}
 
 def prompt(message):
     print(f"==> {message}")
 
-def display_winner(player, computer):
-    prompt(f"You chose {player}, computer chose {computer}")
-
-    if ((player == "rock" and computer == "scissors") or
-        (player == "paper" and computer == "rock") or
-        (player == "scissors" and computer == "paper")):
-        prompt("You win!")
-    elif ((player == "rock" and computer == "paper") or
-          (player == "paper" and computer == "scissors") or
-          (player == "scissors" and computer == "rock")):
-        prompt("Computer wins!")
+def calculate_winner(player, computer):
+    if player == computer:
+        winner = "neither"
     else:
-        prompt("It's a tie!")
+        beaten_by_player_choice = BEATS[player]
+        if computer in beaten_by_player_choice:
+            winner = 'player'
+        else:
+            winner = 'computer'
+    return winner
 
-def get_user_choice():
+def display_winner(winner):
+    match winner:
+        case "player":
+            prompt("You win!")
+        case "computer":
+            prompt("Computer wins!")
+        case "neither":
+            prompt("It's a tie!")
+
+def get_player_choice():
     prompt(f'Choose one: {", ".join(VALID_CHOICES)}')
     choice = input()
 
@@ -29,7 +42,10 @@ def get_user_choice():
 
     return choice
 
-def check_user_wants_to_play():
+def display_choices(player_choice, computer_choice):
+    prompt(f"You chose {player_choice}, computer chose {computer_choice}")
+
+def check_player_wants_to_play():
     while True:
         prompt("Do you want to play again (y/n)?")
         answer = input().lower()
@@ -42,16 +58,17 @@ def check_user_wants_to_play():
     return answer[0] == 'y'
 
 def play_rock_paper_scissors():
-    user_wants_to_play = True
+    player_wants_to_play = True
 
-    while user_wants_to_play:
-
-        choice = get_user_choice()
-
+    while player_wants_to_play:
+        player_choice = get_player_choice()
         computer_choice = random.choice(VALID_CHOICES)
 
-        display_winner(choice, computer_choice)
+        winner = calculate_winner(player_choice, computer_choice)
 
-        user_wants_to_play = check_user_wants_to_play()
+        display_choices(player_choice, computer_choice)
+        display_winner(winner)
+
+        player_wants_to_play = check_player_wants_to_play()
 
 play_rock_paper_scissors()
