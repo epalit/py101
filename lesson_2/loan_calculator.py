@@ -11,15 +11,13 @@ def fmt_prompt_msg(msg, err=False, inc_newline=False):
 
 def welcome():
     msg = fmt_prompt_msg(
-    """ Welcome to the loan calculator!
-
-    We'll ask you for three pieces of information one at a time:
-            - amount
-            - apr
-            - duration
-
-    Then we'll display your monthly payment.
-    """)
+    "Welcome to the loan calculator!\n\n" \
+    "We'll ask you for three pieces of information one at a time:\n" \
+    "        - amount\n" \
+    "        - apr\n" \
+    "        - duration\n\n" \
+    "Then we'll display your monthly payment.\n"
+    )
     print(msg)
 
 def get_loan_amount():
