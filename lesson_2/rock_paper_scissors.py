@@ -19,9 +19,7 @@ def display_winner(player, computer):
     else:
         prompt("It's a tie!")
 
-user_wants_to_play = True
-
-while user_wants_to_play:
+def get_user_choice():
     prompt(f'Choose one: {", ".join(VALID_CHOICES)}')
     choice = input()
 
@@ -29,10 +27,9 @@ while user_wants_to_play:
         prompt("That's not a valid choice")
         choice = input()
 
-    computer_choice = random.choice(VALID_CHOICES)
+    return choice
 
-    display_winner(choice, computer_choice)
-
+def check_user_wants_to_play():
     while True:
         prompt("Do you want to play again (y/n)?")
         answer = input().lower()
@@ -42,5 +39,19 @@ while user_wants_to_play:
         else:
             prompt("That's not a valid choice")
 
-    if answer[0] == 'n':
-        user_wants_to_play = False
+    return answer[0] == 'y'
+
+def play_rock_paper_scissors():
+    user_wants_to_play = True
+
+    while user_wants_to_play:
+
+        choice = get_user_choice()
+
+        computer_choice = random.choice(VALID_CHOICES)
+
+        display_winner(choice, computer_choice)
+
+        user_wants_to_play = check_user_wants_to_play()
+
+play_rock_paper_scissors()
