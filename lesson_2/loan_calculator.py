@@ -56,9 +56,9 @@ def get_apr():
                 inc_newline=True
             )
             continue
-        if apr <= 0:
+        if apr < 0:
             msg = fmt_prompt_msg(
-                "APR cannot be negative or 0, please enter a value above 0",
+                "APR cannot be negative, please enter a value 0 or above",
                 err=True,
                 inc_newline=True
             )
@@ -125,7 +125,10 @@ def calc_monthly_payment(
     ):
     decimal_apr = apr/100
     rate = decimal_apr/12
-    monthly_payment = amount * (rate / (1 - (1 + rate) ** (-duration)))
+    if apr == 0.0:
+        monthly_payment = amount/duration
+    else:
+        monthly_payment = amount * (rate / (1 - (1 + rate) ** (-duration)))
     return monthly_payment
 
 def display_monthly_payment(monthly_payment):
