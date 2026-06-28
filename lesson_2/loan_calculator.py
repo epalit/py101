@@ -127,7 +127,7 @@ def calc_monthly_payment(
     ):
     decimal_apr = apr/100
     rate = decimal_apr / MONTHS_IN_A_YEAR
-    if apr == 0.0:
+    if rate == 0.0:
         monthly_payment = amount/duration
     else:
         monthly_payment = amount * (rate / (1 - (1 + rate) ** (-duration)))
