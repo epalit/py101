@@ -50,7 +50,7 @@ def get_apr():
     while True:
         apr = input(msg).strip()
         try:
-            apr= float(apr)
+            apr = float(apr)
         except ValueError:
             msg = fmt_prompt_msg(
                 "Please enter a whole number or decimal using a '.', no '%'",
