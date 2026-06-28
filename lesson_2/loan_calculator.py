@@ -139,11 +139,11 @@ def display_monthly_payment(monthly_payment):
 
 def user_wants_to_continue():
     msg = fmt_prompt_msg(
-        "Do you want to perform another calculation? (y/n)",
+        "Do you want to perform another calculation? (y or yes to continue)",
         inc_newline=True
     )
     response = input(msg)
-    return bool(response) and response[0].lower() == 'y'
+    return response in ('y', 'yes', 'Y', 'YES', 'Yes')
 
 def run_loan_calculator():
     welcome()
