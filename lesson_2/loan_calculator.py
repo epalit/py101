@@ -140,8 +140,8 @@ def user_wants_to_continue():
         "Do you want to perform another calculation? (y or yes to continue)",
         inc_newline=True
     )
-    response = input(msg)
-    return response in ('y', 'yes', 'Y', 'YES', 'Yes')
+    response = input(msg).strip().lower()
+    return response in ('y', 'yes')
 
 def run_loan_calculator():
     welcome()
