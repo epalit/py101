@@ -81,8 +81,8 @@ def check_player_wants_to_play():
 
         if answer.startswith('n') or answer.startswith('y'):
             break
-        else:
-            prompt("That's not a valid choice")
+
+        prompt("That's not a valid choice")
 
     return answer[0] == 'y'
 
