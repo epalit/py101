@@ -1,6 +1,12 @@
 import random
 
-VALID_CHOICES = ["rock", "paper", "scissors", "lizard", "spock"]
+VALID_CHOICES = {
+    "r" : "rock",
+    "p" : "paper",
+    "sc": "scissors",
+    "l" : "lizard",
+    "sp": "spock",
+}
 BEATS = {
     "rock": ("scissors", "lizard"),
     "paper": ("rock", "spock"),
@@ -32,15 +38,27 @@ def display_winner(winner):
         case "neither":
             prompt("It's a tie!")
 
+def get_player_choice_prompt():
+    choice_strs = []
+    for shortcut, fullname in VALID_CHOICES.items():
+        choice_strs.append(f'{fullname} ({shortcut})')
+    return f'Choose one: {", ".join(choice_strs)}'
+
 def get_player_choice():
-    prompt(f'Choose one: {", ".join(VALID_CHOICES)}')
-    choice = input()
+    prompt_msg = get_player_choice_prompt()
+    prompt(prompt_msg)
 
-    while choice not in VALID_CHOICES:
+    player_choice = input()
+
+    while True:
+        if player_choice in VALID_CHOICES.values():
+            return player_choice
+
+        if player_choice in VALID_CHOICES:
+            return VALID_CHOICES[player_choice]
+
         prompt("That's not a valid choice")
-        choice = input()
-
-    return choice
+        player_choice = input()
 
 def display_choices(player_choice, computer_choice):
     prompt(f"You chose {player_choice}, computer chose {computer_choice}")
@@ -62,7 +80,7 @@ def play_rock_paper_scissors():
 
     while player_wants_to_play:
         player_choice = get_player_choice()
-        computer_choice = random.choice(VALID_CHOICES)
+        computer_choice = random.choice(list(VALID_CHOICES.values()))
 
         winner = calculate_winner(player_choice, computer_choice)
 
