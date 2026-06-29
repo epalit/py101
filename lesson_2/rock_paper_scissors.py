@@ -14,6 +14,7 @@ BEATS = {
     "lizard": ("paper", "spock"),
     "spock": ("rock", "scissors")
 }
+ROUNDS_TO_WIN = 3
 
 def prompt(message):
     print(f"==> {message}")
@@ -29,14 +30,24 @@ def calculate_winner(player, computer):
             winner = 'computer'
     return winner
 
-def display_winner(winner):
+def display_round_winner(winner):
     match winner:
         case "player":
-            prompt("You win!")
+            prompt("You win this round!")
         case "computer":
-            prompt("Computer wins!")
+            prompt("Computer wins this round!")
         case "neither":
-            prompt("It's a tie!")
+            prompt("This round is a tie!")
+
+def display_grand_winner(grand_winner):
+    match grand_winner:
+        case "player":
+            prompt("You are the grand winner!")
+        case "computer":
+            prompt("Computer is the grand winner!")
+
+def display_score(player_wins, computer_wins):
+    prompt(f'The score is player: {player_wins}, computer: {computer_wins}')
 
 def get_player_choice_prompt():
     choice_strs = []
@@ -75,17 +86,39 @@ def check_player_wants_to_play():
 
     return answer[0] == 'y'
 
+def play_round():
+    player_choice = get_player_choice()
+    computer_choice = random.choice(list(VALID_CHOICES.values()))
+
+    winner = calculate_winner(player_choice, computer_choice)
+
+    display_choices(player_choice, computer_choice)
+    display_round_winner(winner)
+
+    return winner
+
 def play_rock_paper_scissors():
     player_wants_to_play = True
 
     while player_wants_to_play:
-        player_choice = get_player_choice()
-        computer_choice = random.choice(list(VALID_CHOICES.values()))
+        num_player_wins = 0
+        num_computer_wins = 0
 
-        winner = calculate_winner(player_choice, computer_choice)
+        while (num_player_wins < ROUNDS_TO_WIN) \
+            and (num_computer_wins < ROUNDS_TO_WIN):
+            winner = play_round()
+            if winner == 'computer':
+                num_computer_wins += 1
+            elif winner == 'player':
+                num_player_wins += 1
+            display_score(num_player_wins, num_computer_wins)
 
-        display_choices(player_choice, computer_choice)
-        display_winner(winner)
+        if num_player_wins == ROUNDS_TO_WIN:
+            grand_winner = 'player'
+        else:
+            grand_winner = 'computer'
+
+        display_grand_winner(grand_winner)
 
         player_wants_to_play = check_player_wants_to_play()
 
